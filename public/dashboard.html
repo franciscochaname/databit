@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - Databit</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        /* Un estilo simple específico para esta página */
+        .dashboard-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .welcome-text { color: #2c3e50; }
+        .btn-logout {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        .btn-logout:hover { background-color: #c82333; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1 class="welcome-text">¡Bienvenido al Sistema Databit!</h1>
+        <p>Has iniciado sesión correctamente de forma segura usando JWT.</p>
+        
+        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+        <div id="user-info">
+            <p>Estado: <strong>Conectado</strong></p>
+        </div>
+
+        <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
+    </div>
+
+    <script type="module">
+        import { Session } from '../js/session.js';
+
+        // 1. PROTECCIÓN: Verificar si hay token al entrar
+        // Si alguien intenta entrar aquí pegando la URL sin loguearse,
+        // la función Session.check() lo expulsará al login.
+        Session.check();
+
+        // 2. LOGOUT: Configurar el botón de salir
+        const btnLogout = document.getElementById('btn-logout');
+        
+        if (btnLogout) {
+            btnLogout.addEventListener('click', () => {
+                if (confirm('¿Estás seguro de que quieres salir?')) {
+                    Session.remove(); // Borra token y redirige a login
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<script>
+    // Si hay un token, ve al dashboard, si no, al login
+    if (localStorage.getItem('databit_token')) {
+        window.location.href = 'public/dashboard.html';
+    } else {
+        window.location.href = 'public/login.html';
+    }
+</script>
