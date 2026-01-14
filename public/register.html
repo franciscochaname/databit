@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databit - Registro Nuevo</title>
+    <script src="../js/global-loader.js"></script>
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="container col-md-8 col-lg-6">
+        <div id="register-box" class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-5">
+                
+                <h2 class="text-center text-primary fw-bold mb-2">Crear Cuenta</h2>
+                <p class="text-center text-muted mb-4">Únete a la comunidad Databit</p>
+                
+                <form id="register-form">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" id="reg-nombre" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Apellido</label>
+                            <input type="text" id="reg-apellido" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">DNI</label>
+                            <input type="text" id="reg-dni" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" id="reg-tel" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input type="email" id="reg-email" class="form-control" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" id="reg-dir" class="form-control">
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" id="reg-pass" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Confirmar</label>
+                            <input type="password" id="reg-confirm" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-register" class="btn btn-success w-100 py-2 fw-bold shadow-sm">
+                        <span id="btn-text-register">Registrarse Ahora</span>
+                    </button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="mb-0 text-muted">¿Ya tienes cuenta?</p>
+                    <a href="login.html" class="text-decoration-none fw-bold">Inicia Sesión aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

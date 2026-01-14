@@ -3,67 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Principal - Databit</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <style>
-        /* Un estilo simple específico para esta página */
-        .dashboard-container {
-            max-width: 800px;
-            margin: 50px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .welcome-text { color: #2c3e50; }
-        .btn-logout {
-            background-color: #dc3545;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-size: 1rem;
-        }
-        .btn-logout:hover { background-color: #c82333; }
-    </style>
+    <title>Panel - Databit</title>
+    <script src="../js/global-loader.js"></script>
 </head>
 <body>
 
-    <div class="dashboard-container">
-        <h1 class="welcome-text">¡Bienvenido al Sistema Databit!</h1>
-        <p>Has iniciado sesión correctamente de forma segura usando JWT.</p>
+    <div id="wrapper">
         
-        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+        <nav class="sidebar">
+            <div class="brand">
+                <i class="fas fa-database me-2"></i>Databit
+            </div>
+            
+            <div class="d-flex flex-column h-100 justify-content-between">
+                <ul class="list-unstyled components">
+                    <li><a href="#" class="active">🏠 Inicio</a></li>
+                    <li><a href="#">👤 Mis Datos</a></li>
+                    <li><a href="#">📄 Reportes</a></li>
+                    <li><a href="#">⚙️ Configuración</a></li>
+                </ul>
 
-        <div id="user-info">
-            <p>Estado: <strong>Conectado</strong></p>
+                <div class="p-3">
+                    <button id="btn-logout" class="btn btn-danger w-100 shadow-sm">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            
+            <div class="top-navbar shadow-sm">
+                <h5 class="mb-0 text-secondary">Panel de Control</h5>
+                <div class="user-badge">
+                    <div class="user-icon">U</div>
+                    <div>
+                        <small class="text-muted d-block" style="font-size: 0.7em;">Conectado:</small>
+                        <span id="user-display-name" class="fw-bold text-dark">Usuario</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid p-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm p-4">
+                            <h2 class="text-primary mb-3">¡Bienvenido al Sistema!</h2>
+                            <p class="text-muted">Selecciona una opción del menú de la izquierda para comenzar a trabajar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <button id="btn-logout" class="btn-logout">Cerrar Sesión</button>
     </div>
 
     <script type="module">
         import { Session } from '../js/session.js';
-
-        // 1. PROTECCIÓN: Verificar si hay token al entrar
-        // Si alguien intenta entrar aquí pegando la URL sin loguearse,
-        // la función Session.check() lo expulsará al login.
         Session.check();
 
-        // 2. LOGOUT: Configurar el botón de salir
-        const btnLogout = document.getElementById('btn-logout');
-        
-        if (btnLogout) {
-            btnLogout.addEventListener('click', () => {
-                if (confirm('¿Estás seguro de que quieres salir?')) {
-                    Session.remove(); // Borra token y redirige a login
-                }
-            });
+        // Mostrar usuario
+        const token = Session.get();
+        if (token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+                const data = JSON.parse(jsonPayload);
+                document.getElementById('user-display-name').textContent = `ID: ${data.id_usuario}`;
+            } catch (e) {}
         }
-    </script>
 
+        // Logout
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            Swal.fire({
+                title: '¿Cerrar Sesión?',
+                text: "Volverás a la pantalla de ingreso",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, salir',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) Session.remove();
+            });
+        });
+    </script>
 </body>
 </html>

@@ -3,63 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Databit - Acceso Seguro</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/auth.css">
+    <title>Databit - Acceso</title>
+    <script src="../js/global-loader.js"></script>
 </head>
-<body>
-    <div class="auth-container">
+<body class="bg-light">
+
+    <div class="d-flex align-items-center justify-content-center min-vh-100">
         
-        <div id="login-box" class="card">
-            <h2>Bienvenido a Databit</h2>
-            <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">
-                Ingresa tus credenciales para continuar
-            </p>
+        <div class="container col-11 col-md-5 col-lg-4">
+            <div id="login-box" class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-5">
+                    
+                    <div class="text-center mb-4">
+                        <h2 class="text-primary fw-bold">Bienvenido</h2>
+                        <p class="text-muted">Sistema de Gestión Databit</p>
+                    </div>
 
-            <form id="login-form">
-                <div class="form-group">
-                    <label>DNI / Usuario</label>
-                    <input type="text" id="login-dni" placeholder="Ej: 12345678" required>
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">DNI / Usuario</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">👤</span>
+                                <input type="text" id="login-dni" class="form-control border-start-0 ps-0" placeholder="Ej: 12345678" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Contraseña</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">🔒</span>
+                                <input type="password" id="login-pass" class="form-control border-start-0 ps-0" placeholder="******" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-login" class="btn btn-primary w-100 py-2 fw-bold shadow-sm">
+                            <span id="btn-text-login">Ingresar</span>
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <a href="register.html" class="text-decoration-none fw-bold">Crear Cuenta Nueva</a>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="login-pass" placeholder="******" required>
-                </div>
-
-                <button type="submit" class="btn-primary">Ingresar</button>
-            </form>
-
-            <div class="footer-card">
-                <p>¿No tienes cuenta?</p>
-                <button type="button" id="btn-show-register" class="btn-secondary">Regístrate aquí</button>
             </div>
         </div>
-
-        <div id="register-box" class="card hidden">
-            <h2>Crear Cuenta Nueva</h2>
-            
-            <form id="register-form">
-                <div class="grid-form">
-                    <input type="text" id="reg-nombre" placeholder="Nombre" required>
-                    <input type="text" id="reg-apellido" placeholder="Apellido" required>
-                    <input type="text" id="reg-dni" placeholder="DNI" required>
-                    <input type="text" id="reg-tel" placeholder="Teléfono">
-                    <input type="email" id="reg-email" placeholder="Correo Electrónico" required>
-                    <input type="text" id="reg-dir" placeholder="Dirección">
-                    <input type="password" id="reg-pass" placeholder="Contraseña" required>
-                    <input type="password" id="reg-confirm" placeholder="Confirmar Contraseña" required>
-                </div>
-
-                <button type="submit" class="btn-primary">Registrarse</button>
-            </form>
-
-            <div class="footer-card">
-                <p>¿Ya tienes usuario?</p>
-                <button type="button" id="btn-show-login" class="btn-secondary">Volver al Login</button>
-            </div>
-        </div>
-
+        
     </div>
 
     <script type="module" src="../js/auth.js"></script>
